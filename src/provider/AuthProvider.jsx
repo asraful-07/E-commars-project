@@ -10,11 +10,14 @@ import {
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const axiosSecure = useAxiosSecure();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -68,16 +71,16 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
+  // useEffect(() => {
+  //   const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     setLoading(false);
+  //   });
 
-    return () => {
-      return unSubscribe();
-    };
-  }, []);
+  //   return () => {
+  //     return unSubscribe();
+  //   };
+  // }, []);
 
   // useEffect(() => {
   //   const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -118,6 +121,38 @@ const AuthProvider = ({ children }) => {
   //     unsubscribe();
   //   };
   // }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      console.log("CurrentUser-->", currentUser?.email);
+      if (currentUser?.email) {
+        setUser(currentUser);
+        // save user info in db
+        await axiosSecure.post(`/users/${currentUser?.email}`, {
+          name: currentUser?.displayName,
+          image: currentUser?.photoURL,
+          email: currentUser?.email,
+        });
+        // Get JWT token
+        await axiosSecure.post(
+          `/jwt`,
+          {
+            email: currentUser?.email,
+          },
+          { withCredentials: true }
+        );
+      } else {
+        setUser(currentUser);
+        await axiosSecure.get(`/logout`, {
+          withCredentials: true,
+        });
+      }
+      setLoading(false);
+    });
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
 
   const info = {
     handleRegister,
