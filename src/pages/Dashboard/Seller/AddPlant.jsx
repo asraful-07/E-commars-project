@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet-async";
 // import { imageUpload } from "../../../api/utils";
 import { useState } from "react";
-import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import UseAuth from "../../../hooks/useAuth";
+import { TbFidgetSpinner } from "react-icons/tb";
+import toast from "react-hot-toast";
 
 const AddPlant = () => {
   const { user } = UseAuth();

@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddPlant from "../pages/Dashboard/Seller/AddPlant";
 import Title from "../components/Title";
+import Plant from "../components/Plant";
 
 const routes = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const routes = createBrowserRouter([
       {
         path: "home",
         element: <Title />,
+      },
+      {
+        path: "plant",
+        element: <Plant />,
       },
     ],
   },
