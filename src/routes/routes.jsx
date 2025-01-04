@@ -7,6 +7,8 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AddPlant from "../pages/Dashboard/Seller/AddPlant";
 import Title from "../components/Title";
 import Plant from "../components/Plant";
+import PlantDetails from "../pages/PlantDetails/PlantDetails";
+import MyOrders from "../pages/Customer/MyOrders";
 
 const routes = createBrowserRouter([
   {
@@ -16,6 +18,10 @@ const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/plant/:id",
+        element: <PlantDetails />,
       },
       {
         path: "login",
@@ -32,16 +38,20 @@ const routes = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "add-from",
-        element: <AddPlant />,
-      },
-      {
         path: "home",
         element: <Title />,
       },
       {
+        path: "add-from",
+        element: <AddPlant />,
+      },
+      {
         path: "plant",
         element: <Plant />,
+      },
+      {
+        path: "oder",
+        element: <MyOrders />,
       },
     ],
   },

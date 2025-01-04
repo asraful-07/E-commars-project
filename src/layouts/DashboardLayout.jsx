@@ -43,12 +43,12 @@ const DashboardLayout = () => {
             </li>
             <li className="py-2 px-4 hover:bg-blue-700">
               <NavLink
-                to="/dashboard/settings"
+                to="oder"
                 className={({ isActive }) =>
                   isActive ? "text-yellow-400" : "text-white"
                 }
               >
-                Settings
+                My Oder
               </NavLink>
             </li>
             <li className="py-2 px-4 hover:bg-blue-700">
