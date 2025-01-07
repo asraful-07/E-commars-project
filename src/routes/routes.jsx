@@ -9,6 +9,9 @@ import Title from "../components/Title";
 import Plant from "../components/Plant";
 import PlantDetails from "../pages/PlantDetails/PlantDetails";
 import MyOrders from "../pages/Customer/MyOrders";
+import CustomerMenu from "../Dashboard/Sidebar/CustomerMenu";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUser";
+import Profile from "../components/Profile";
 
 const routes = createBrowserRouter([
   {
@@ -42,6 +45,10 @@ const routes = createBrowserRouter([
         element: <Title />,
       },
       {
+        path: "seller",
+        element: <CustomerMenu />,
+      },
+      {
         path: "add-from",
         element: <AddPlant />,
       },
@@ -52,6 +59,14 @@ const routes = createBrowserRouter([
       {
         path: "oder",
         element: <MyOrders />,
+      },
+      {
+        path: "user",
+        element: <ManageUsers />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

@@ -23,6 +23,16 @@ const DashboardLayout = () => {
             </li>
             <li className="py-2 px-4 hover:bg-blue-700">
               <NavLink
+                to="/dashboard/seller"
+                className={({ isActive }) =>
+                  isActive ? "text-yellow-400" : "text-white"
+                }
+              >
+                Become A Seller
+              </NavLink>
+            </li>
+            <li className="py-2 px-4 hover:bg-blue-700">
+              <NavLink
                 to="plant"
                 className={({ isActive }) =>
                   isActive ? "text-yellow-400" : "text-white"
@@ -53,12 +63,22 @@ const DashboardLayout = () => {
             </li>
             <li className="py-2 px-4 hover:bg-blue-700">
               <NavLink
-                to="/dashboard/logout"
+                to="/dashboard/user"
                 className={({ isActive }) =>
                   isActive ? "text-yellow-400" : "text-white"
                 }
               >
-                Logout
+                Manage User
+              </NavLink>
+            </li>
+            <li className="py-2 px-4 hover:bg-blue-700">
+              <NavLink
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  isActive ? "text-yellow-400" : "text-white"
+                }
+              >
+                Profile
               </NavLink>
             </li>
           </ul>
