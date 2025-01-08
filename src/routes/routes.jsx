@@ -12,6 +12,8 @@ import MyOrders from "../pages/Customer/MyOrders";
 import CustomerMenu from "../Dashboard/Sidebar/CustomerMenu";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUser";
 import Profile from "../components/Profile";
+import SellerRoute from "./SelaRoutes";
+import AdminRoute from "./AdminRoutes";
 
 const routes = createBrowserRouter([
   {
@@ -50,7 +52,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "add-from",
-        element: <AddPlant />,
+        element: (
+          <SellerRoute>
+            <AddPlant />
+          </SellerRoute>
+        ),
       },
       {
         path: "plant",
@@ -62,7 +68,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "user",
-        element: <ManageUsers />,
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "profile",

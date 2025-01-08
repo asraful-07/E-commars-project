@@ -9,8 +9,4 @@ const SellerRoute = ({ children }) => {
   return <Navigate to="/dashboard" replace="true" />;
 };
 
-SellerRoute.propTypes = {
-  children: PropTypes.element,
-};
-
 export default SellerRoute;
