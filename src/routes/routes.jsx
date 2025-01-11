@@ -14,6 +14,8 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUser";
 import Profile from "../components/Profile";
 import SellerRoute from "./SelaRoutes";
 import AdminRoute from "./AdminRoutes";
+import MyInventory from "../pages/Dashboard/Seller/MyInventory";
+import ManageOrders from "../pages/Dashboard/Seller/ManageOder";
 
 const routes = createBrowserRouter([
   {
@@ -77,6 +79,22 @@ const routes = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "my-inventory",
+        element: (
+          <SellerRoute>
+            <MyInventory />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "manageOrders",
+        element: (
+          <SellerRoute>
+            <ManageOrders />
+          </SellerRoute>
+        ),
       },
     ],
   },
