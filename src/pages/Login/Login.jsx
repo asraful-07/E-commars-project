@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider";
+import { saveUser } from "../../api/uitls";
 // import Lottie from "lottie-react";
 // import loginAnimation from "../assets/Lottie.json";
 
@@ -44,9 +45,21 @@ const Login = () => {
 
   const handleGoogleLoginClick = async () => {
     try {
-      await handleGoogleLogin();
-      navigate(from, { replace: true });
+      // Initiate Google Login
+      const data = await handleGoogleLogin();
+
+      // Validate user data
+      if (data?.user) {
+        // Save user information to the database
+        await saveUser(data.user);
+
+        // Redirect user to the intended location
+        navigate(from || "/", { replace: true });
+      } else {
+        throw new Error("User data not found after Google login.");
+      }
     } catch (err) {
+      console.error("Google login error:", err.message);
       setError("Google login failed. Please try again.");
     }
   };

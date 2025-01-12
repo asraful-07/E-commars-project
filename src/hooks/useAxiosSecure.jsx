@@ -2,6 +2,7 @@ import axios from "axios";
 
 const axiosSecure = axios.create({
   baseURL: "http://localhost:5000",
+  withCredentials: true,
 });
 const useAxiosSecure = () => {
   return axiosSecure;
@@ -11,6 +12,8 @@ export default useAxiosSecure;
 
 // import axios from "axios";
 // import { useEffect } from "react";
+// // import { useNavigate } from "react-router-dom";
+// import UseAuth from "./useAuth";
 
 // const axiosSecure = axios.create({
 //   baseURL: "http://localhost:5000",
@@ -18,7 +21,7 @@ export default useAxiosSecure;
 // });
 
 // const useAxiosSecure = () => {
-//   const navigate = useNavigate();
+//   // const navigate = useNavigate();
 //   const { handleLogout } = UseAuth();
 //   useEffect(() => {
 //     axiosSecure.interceptors.response.use(
@@ -31,13 +34,13 @@ export default useAxiosSecure;
 //           // logout
 //           handleLogout();
 //           // navigate to login
-//           navigate("/login");
+//           // navigate("/login");
 //           console.log("hello");
 //         }
 //         return Promise.reject(error);
 //       }
 //     );
-//   }, [handleLogout, navigate]);
+//   }, [handleLogout]);
 //   return axiosSecure;
 // };
 

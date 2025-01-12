@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
+import { saveUser } from "../../api/uitls";
 // import Lottie from "lottie-react";
 // import loginAnimation from "../assets/loginAnimation.json";
 
@@ -14,7 +15,7 @@ const Register = () => {
 
   const handelSinUp = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(""); // Clear previous errors
 
     // Collect input values
     const name = e.target.name.value.trim();
@@ -55,31 +56,19 @@ const Register = () => {
 
     try {
       // Register the user
-      const result = await handleRegister(email, password);
-      const creationTime = result.user?.metadata?.creationTime;
+      const res = await handleRegister(email, password);
 
-      // Save the user's profile
+      // Manage user profile
       await manageProfile(name, photoUrl);
 
-      // Prepare the user data to be saved in the database
-      const user = { name, email, creationTime };
-
-      // Save user info to the database
-      const response = await fetch(
-        "https://project-server-site.vercel.app/users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        }
-      );
-
-      const data = await response.json();
-      // console.log("User created:", data);
+      // Save user information in the database
+      await saveUser({
+        ...res.user,
+        displayName: name,
+      });
 
       toast.success("Registration successful!");
+      console.log("Registration successful:", res);
     } catch (err) {
       // Handle registration errors
       console.error("Registration error:", err);

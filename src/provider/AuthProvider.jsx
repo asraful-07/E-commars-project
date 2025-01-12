@@ -121,17 +121,46 @@ const AuthProvider = ({ children }) => {
   //   };
   // }, []);
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+  //     console.log("CurrentUser-->", currentUser?.email);
+  //     if (currentUser?.email) {
+  //       setUser(currentUser);
+  //       // save user info in db
+  //       await axiosSecure.post(`/users/${currentUser?.email}`, {
+  //         name: currentUser?.displayName,
+  //         image: currentUser?.photoURL,
+  //         email: currentUser?.email,
+  //       });
+  //       // Get JWT token
+  //       await axiosSecure.post(
+  //         `/jwt`,
+  //         {
+  //           email: currentUser?.email,
+  //         },
+  //         { withCredentials: true }
+  //       );
+  //     } else {
+  //       setUser(currentUser);
+  //       await axiosSecure.get(`/logout`, {
+  //         withCredentials: true,
+  //       });
+  //     }
+  //     setLoading(false);
+  //   });
+  //   return () => {
+  //     return unsubscribe();
+  //   };
+  // }, []);
+
+  // onAuthStateChange
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log("CurrentUser-->", currentUser?.email);
+      console.log("CurrentUser-->", currentUser);
       if (currentUser?.email) {
         setUser(currentUser);
-        // save user info in db
-        await axiosSecure.post(`/users/${currentUser?.email}`, {
-          name: currentUser?.displayName,
-          image: currentUser?.photoURL,
-          email: currentUser?.email,
-        });
+
         // Get JWT token
         await axiosSecure.post(
           `/jwt`,
@@ -158,11 +187,11 @@ const AuthProvider = ({ children }) => {
     handleLogin,
     handleGoogleLogin,
     manageProfile,
-    handleLogout,
     user,
     loading,
     setUser,
     forgotPassword,
+    handleLogout,
   };
 
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;

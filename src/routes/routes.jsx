@@ -16,6 +16,7 @@ import SellerRoute from "./SelaRoutes";
 import AdminRoute from "./AdminRoutes";
 import MyInventory from "../pages/Dashboard/Seller/MyInventory";
 import ManageOrders from "../pages/Dashboard/Seller/ManageOder";
+import PrivetRouter from "./PrivetRouter";
 
 const routes = createBrowserRouter([
   {
@@ -66,7 +67,12 @@ const routes = createBrowserRouter([
       },
       {
         path: "oder",
-        element: <MyOrders />,
+        element: (
+          <PrivetRouter>
+            {" "}
+            <MyOrders />
+          </PrivetRouter>
+        ),
       },
       {
         path: "user",
