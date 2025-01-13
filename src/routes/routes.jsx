@@ -17,6 +17,7 @@ import AdminRoute from "./AdminRoutes";
 import MyInventory from "../pages/Dashboard/Seller/MyInventory";
 import ManageOrders from "../pages/Dashboard/Seller/ManageOder";
 import PrivetRouter from "./PrivetRouter";
+import Statistics from "../components/Statistics";
 
 const routes = createBrowserRouter([
   {
@@ -100,6 +101,15 @@ const routes = createBrowserRouter([
           <SellerRoute>
             <ManageOrders />
           </SellerRoute>
+        ),
+      },
+      {
+        path: "statics",
+        element: (
+          <PrivetRouter>
+            {" "}
+            <Statistics />
+          </PrivetRouter>
         ),
       },
     ],
